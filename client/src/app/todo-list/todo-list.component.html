@@ -1,0 +1,28 @@
+<div>
+	<h1>My Todos</h1>
+	<form #todoForm="ngForm" (ngSubmit)="createForm(todoForm)" novalidate>
+		<input type="text" [(ngModel)]="newTodo.title" 
+			placeholder="Type a todo and press enter" 
+			#title="ngModel" name="title"
+			id="title" required />
+		<div *ngIf="title.errors && title.dirty">
+			<div [hidden]="!title.errors.required">
+				Title is Required
+			</div>
+		</div>
+	</form>
+	<ul>
+		<li *ngFor="let todo of todos" [class.completed]="todo.completed === true">
+			<div *ngIf="!editing || editingTodo._id !== todo._id">
+				{{todo.title}}
+				<span><button type="button" name="edit" (click)="editTodo(todo)">Edit</button></span>
+				<span><button type="button" name="delete" (click)="deleteTodo(todo._id)">Delete</button></span>
+			</div>
+			<div *ngIf="editing && editingTodo._id === todo._id">
+				<input [(ngModel)]="editingTodo.title" />
+				<span><button (click)="updateTodo(editingTodo)">Update</button></span>
+				<span><button (click)="clearEditing()">Clear</button></span>
+			</div>
+		</li>
+	</ul>
+</div>
