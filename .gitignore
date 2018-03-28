@@ -1,0 +1,10 @@
+node_modules/
+dist/
+typings/
+.idea/
+coverage/
+typings/
+.DS_Store
+all-log.log
+.env
+
